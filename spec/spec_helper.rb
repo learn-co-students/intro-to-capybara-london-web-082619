@@ -2,6 +2,7 @@
 require 'rspec'
 require 'capybara/rspec'
 require 'capybara/dsl'
+require 'spec_helper'
 
 # Configure RSpec
 RSpec.configure do |config|
@@ -14,6 +15,14 @@ end
 def app
   # Load the application defined in config.ru
   Rack::Builder.parse_file('config.ru').first
+end
+
+ 
+describe "GET '/' - Greeting Form" do
+  it 'welcomes the user' do
+    visit '/'
+    expect(page.body).to include("Welcome!")
+  end
 end
 
 # Configure Capybara to test against the application above.
